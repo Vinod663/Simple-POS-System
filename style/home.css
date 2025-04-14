@@ -1,0 +1,133 @@
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+.navbar {
+    background-color: #3366ff !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+}
+
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-toggler {
+    border-color: white !important;
+}
+.search-btn {
+    background-color: #3366ff !important;
+    color: white !important;
+    border: 1px solid white !important;
+}
+.Dashboard-topic{
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.card-title{
+    font-size: 1rem;
+    font-weight: bold;
+    color: #64748B;
+}
+.stat-customer{
+    margin-top: 20px;
+    background-color: #d7e8fd ;
+    border: 1px solid #93C5FD ;
+}
+.stat-item{
+    margin-top: 20px;
+    background-color: #EBFEF2 ;
+    border: 1px solid #86EFAC ;
+}
+.stat-order{
+    margin-top: 20px;
+    background-color: #FFF1F1;
+    border: 1px solid #FCA5A5 ;
+}
+.stat-revenue{
+    margin-top: 20px;
+    background-color: #E2E7ED ;
+    border: 1px solid #CBD5E1 ;
+}
+.stat-revenue>.card-body>.card-text{
+    margin-bottom: 52px;
+}
+.stat-number{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #334155;
+}
+.customer-btn{
+    background-color: #3365fd;
+    border-color: #80b4fc;
+    color: white;
+}
+.item-btn{
+    background-color: #00a433;
+    border-color: #00a433;
+    color: white;
+}
+.orders-btn{
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: white;
+}
+
+
+.bg-box{
+    margin-top: 2rem;
+    background-color: #eff3f7 !important;
+}
+.qk-actions{
+    margin-top: 20px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+/* Center brand in mobile view */
+@media (max-width: 991.98px) {
+    .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+    /* Force navbar items to appear below the header */
+    .navbar-collapse {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background-color: #3366ff;
+        padding: 10px;
+        z-index: 1000;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .bg-box{
+        margin-top: 0;
+    }
+    .stat-revenue>.card-body>.card-text{
+        margin-bottom: 5px;
+    }
+}
+@media all and (max-width: 768px) {
+
+}
+
+
+
