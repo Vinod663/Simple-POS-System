@@ -17,16 +17,16 @@
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                                    <a class="nav-link active" aria-current="page" href="#" onclick="showSection('dashboard')">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Customer</a>
+                                    <a class="nav-link" href="#" onclick="showSection('customer')">Customer</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Inventory</a>
+                                    <a class="nav-link" href="#" onclick="showSection('item')">Inventory</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Orders</a>
+                                    <a class="nav-link" href="#" onclick="showSection('order')">Orders</a>
                                 </li>
 
                             </ul>
@@ -39,7 +39,8 @@
                 </nav>
             </header>
 
-            <section class="dashboard container">
+            <!-- Dashboard Section -->
+            <section class="dashboard section container" id="dashboard">
                 <div class=" row p-4 bg-box rounded shadow-sm">
                     <h4 class="Dashboard-topic">Dashboard Overview</h4>
                     <div class="row">
@@ -94,7 +95,44 @@
                 </div>
             </section>
 
+            <!-- Customer Section -->
+            <section id="customer" class="container section" style="display: none;">
+                <h2>Customer Management</h2>
+                <p>This is where you'll manage customers.</p>
+                <!-- Add your customer form/table here -->
+            </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Inventory Section -->
+            <section id="item" class="container section" style="display: none;">
+                <h2>Inventory Management</h2>
+                <p>This is where you'll manage items.</p>
+                <!-- Add your inventory form/table here -->
+            </section>
+
+            <!-- Orders Section -->
+            <section id="order" class="container section" style="display: none;">
+                <h2>Orders</h2>
+                <p>This is where you'll manage orders.</p>
+                <!-- Add your order form/table here -->
+            </section>
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                function showSection(sectionId) {
+                    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+                    document.getElementById(sectionId).style.display = 'block';
+                    localStorage.setItem('lastSection', sectionId);
+                }
+
+                function loadLastSection() {
+                    const lastSection = localStorage.getItem('lastSection') || 'dashboard';
+                    showSection(lastSection);
+                }
+
+                window.onload = loadLastSection;
+            </script>
+
 </body>
 </html>
