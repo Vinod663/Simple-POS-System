@@ -32,7 +32,7 @@
     color: white !important;
     border: 1px solid white !important;
 }
-.Dashboard-topic{
+.Section-topic{
     font-weight: bold;
     margin-bottom: 1rem;
 }
@@ -86,6 +86,16 @@
 }
 
 
+/* Styles for customer Table */
+.customer-table tbody tr {
+    cursor: pointer;
+}
+
+.selected-row {
+    background-color: #e6f0ff !important;
+}
+
+
 .bg-box{
     margin-top: 2rem;
     background-color: #eff3f7 !important;
@@ -95,10 +105,6 @@
     font-weight: bold;
     margin-bottom: 1rem;
 }
-
-
-
-
 
 
 /* Center brand in mobile view */
@@ -129,9 +135,55 @@
         margin-bottom: 5px;
     }
 }
-@media all and (max-width: 768px) {
 
+/* Custom styles for responsiveness of table */
+@media (max-width: 768px) {
+    /* Card-based layout for mobile */
+    .table-responsive-card-list .table,
+    .table-responsive-card-list thead,
+    .table-responsive-card-list tbody,
+    .table-responsive-card-list tr {
+        display: block;
+        width: 100%;
+    }
+
+    .table-responsive-card-list thead {
+        display: none; /* Hide table header on mobile */
+    }
+
+    .table-responsive-card-list tbody tr {
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        position: relative;
+    }
+
+    .table-responsive-card-list td {
+        display: flex;
+        padding: 0.5rem;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .table-responsive-card-list td:last-child {
+        border-bottom: none;
+    }
+
+    .table-responsive-card-list td::before {
+        content: attr(data-label);
+        width: 40%;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* Selected row in card view */
+    .selected-row {
+        background-color: #e6f0ff;
+    }
 }
+
+
 
 
 

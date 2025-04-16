@@ -41,8 +41,8 @@
 
             <!-- Dashboard Section -->
             <section class="dashboard section container" id="dashboard">
-                <div class=" row p-4 bg-box rounded shadow-sm">
-                    <h4 class="Dashboard-topic">Dashboard Overview</h4>
+                <div class="p-4 bg-box rounded shadow-sm">
+                    <h4 class="Section-topic">Dashboard Overview</h4>
                     <div class="row">
                         <div class="col-sm-6 stat-card">
                             <div class="card stat-customer">
@@ -97,9 +97,210 @@
 
             <!-- Customer Section -->
             <section id="customer" class="container section" style="display: none;">
-                <h2>Customer Management</h2>
-                <p>This is where you'll manage customers.</p>
-                <!-- Add your customer form/table here -->
+                <div class=" p-4 bg-box rounded shadow-sm">
+                    <h4 class="Section-topic">Customer Management</h4>
+                    <div class="row">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search customers by name, email or phone">
+                            <div class="input-group-append">
+                                <select class="form-select border-start-0">
+                                    <option>Name</option>
+                                    <option>Email</option>
+                                    <option>Phone</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 ms-2">
+                                <button class="btn btn-primary w-100">Search</button>
+                            </div>
+                        </div>
+                        <div class="button-fields mt-3">
+                            <!-- Register Customer Button that triggers the modal -->
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newCustomerModal">
+                                Register Customer
+                            </button>
+
+                            <!-- New Customer Modal -->
+                            <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-primary text-white ">
+                                            <h5 class="modal-title position-absolute top-20 start-50 translate-middle-x" id="newCustomerModalLabel">New Customer</h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="newCustomerForm">
+                                                <div class="mb-3">
+                                                    <label for="customerId" class="form-label">Customer ID:</label>
+                                                    <input type="text" class="form-control" id="customerId">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="customerName" class="form-label">Customer Name:</label>
+                                                    <input type="text" class="form-control" id="customerName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="customerEmail" class="form-label">Customer Email:</label>
+                                                    <input type="email" class="form-control" id="customerEmail">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phone" class="form-label">Phone:</label>
+                                                    <input type="tel" class="form-control" id="phone">
+                                                </div>
+                                                <div class="d-grid gap-2">
+                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Update Customer Button that triggers the modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateCustomerModal">
+                                Update
+                            </button>
+
+                            <!-- Update Customer Modal -->
+                            <div class="modal fade" id="updateCustomerModal" tabindex="-1" aria-labelledby="updateCustomerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-primary text-white">
+                                            <h5 class="modal-title position-absolute top-20 start-50 translate-middle-x" id="updateCustomerModalLabel">Update Customer</h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="updateCustomerForm">
+                                                <div class="mb-3">
+                                                    <label for="updateCustomerId" class="form-label">Customer ID:</label>
+                                                    <input type="text" class="form-control" id="updateCustomerId" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="updateCustomerName" class="form-label">Customer Name:</label>
+                                                    <input type="text" class="form-control" id="updateCustomerName">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="updateCustomerEmail" class="form-label">Customer Email:</label>
+                                                    <input type="email" class="form-control" id="updateCustomerEmail">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="updatePhone" class="form-label">Phone:</label>
+                                                    <input type="tel" class="form-control" id="updatePhone">
+                                                </div>
+                                                <div class="d-grid gap-2">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delete Customer Button that triggers the modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal">
+                                Delete
+                            </button>
+
+                            <!-- Delete Customer Modal -->
+                            <div class="modal fade" id="deleteCustomerModal" tabindex="-1" aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title position-absolute top-20 start-50 translate-middle-x" id="deleteCustomerModalLabel">Delete Customer</h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-warning">
+                                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                                <strong>Warning:</strong> This action cannot be undone.
+                                            </div>
+                                            <p>Are you sure you want to delete this customer?</p>
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <p class="mb-0"><strong>Customer ID:</strong> <span id="deleteCustomerId">C001</span></p>
+                                                    <p class="mb-0"><strong>Name:</strong> <span id="deleteCustomerName">John Smith</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Customer Table -->
+                        <div class="table-responsive-card-list">
+                            <div class="customer-table mt-4">
+                                <table class="table table-hover">
+                                    <thead class="table-primary">
+                                    <tr>
+                                        <th>Customer ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Orders</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr data-id="C001">
+                                        <td data-label="Customer ID">C001</td>
+                                        <td data-label="Customer Name">John Smith</td>
+                                        <td data-label="Email">john@example.com</td>
+                                        <td data-label="Phone">555-123-4567</td>
+                                        <td data-label="Orders">12</td>
+                                    </tr>
+                                    <tr data-id="C002">
+                                        <td data-label="Customer ID">C002</td>
+                                        <td data-label="Customer Name">Jane Doe</td>
+                                        <td data-label="Email">jane@example.com</td>
+                                        <td data-label="Phone">555-987-6543</td>
+                                        <td data-label="Orders">5</td>
+                                    </tr>
+                                    <tr data-id="C003">
+                                        <td data-label="Customer ID">C003</td>
+                                        <td data-label="Customer Name">Robert Johnson</td>
+                                        <td data-label="Email">robert@example.com</td>
+                                        <td data-label="Phone">555-789-0123</td>
+                                        <td data-label="Orders">2</td>
+                                    </tr>
+                                    <tr data-id="C004">
+                                        <td data-label="Customer ID">C004</td>
+                                        <td data-label="Customer Name">Sarah Williams</td>
+                                        <td data-label="Email">sarah@example.com</td>
+                                        <td data-label="Phone">555-456-7890</td>
+                                        <td data-label="Orders">8</td>
+                                    </tr>
+                                    <tr data-id="C005">
+                                        <td data-label="Customer ID">C005</td>
+                                        <td data-label="Customer Name">Vinod Fernando</td>
+                                        <td data-label="Email">vinod@example.com</td>
+                                        <td data-label="Phone">555-236-7120</td>
+                                        <td data-label="Orders">10</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="page-number mt-5">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                   </div>
+                </div>
             </section>
 
             <!-- Inventory Section -->
