@@ -26,7 +26,10 @@
                                     <a class="nav-link" href="#" onclick="showSection('item')">Inventory</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" onclick="showSection('order')">Orders</a>
+                                    <a class="nav-link" href="#" onclick="showSection('order')">Order</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" onclick="showSection('orderDetail')">Order-Details</a>
                                 </li>
 
                             </ul>
@@ -202,11 +205,13 @@
                             <!-- Delete Customer Modal -->
                             <div class="modal fade" id="deleteCustomerModal" tabindex="-1" aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
+                                    <form id="deleteCustomerForm">
                                     <div class="modal-content">
                                         <div class="modal-header bg-danger text-white">
                                             <h5 class="modal-title position-absolute top-20 start-50 translate-middle-x" id="deleteCustomerModalLabel">Delete Customer</h5>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
+
                                         <div class="modal-body">
                                             <div class="alert alert-warning">
                                                 <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -220,11 +225,13 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -418,6 +425,7 @@
                             <!-- Delete Item Modal -->
                             <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
+                                    <form id="deleteItemForm">
                                     <div class="modal-content">
                                         <div class="modal-header bg-danger text-white">
                                             <h5 class="modal-title position-absolute top-20 start-50 translate-middle-x" id="deleteItemModalLabel">Delete Item</h5>
@@ -441,6 +449,7 @@
                                             <button type="button" class="btn btn-danger" id="confirmItemDeleteBtn">Delete</button>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -529,9 +538,241 @@
 
             <!-- Orders Section -->
             <section id="order" class="container section" style="display: none;">
-                <h2>Orders</h2>
-                <p>This is where you'll manage orders.</p>
-                <!-- Add your order form/table here -->
+                <div class=" p-4 bg-box rounded shadow-sm">
+                    <h4 class="Section-topic">Create New Order</h4>
+                    <div class="row">
+                        <!-- Invoice Details Card -->
+
+                        <div class="col-lg-6 mb-4">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-primary text-white fw-bold">
+                                    Invoice Details
+                                </div>
+                                <form id="invoiceForm">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="selectOrderID" class="form-label small fw-bold">Order Id:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="selectOrderID"  placeholder="ORD-1001" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="SelectOrderDate" class="form-label small fw-bold">Date:</label>
+                                            <div class="input-group">
+                                                <input type="date" class="form-control" id="SelectOrderDate">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="customerSelect" class="form-label small fw-bold">Customer Name:</label>
+                                            <div class="input-group">
+                                                <select class="form-select" id="customerSelect">
+                                                    <option selected>Select Customer</option>
+                                                    <option value="John Smith">John Smith</option>
+                                                    <option value="Jane Doe">Jane Doe</option>
+                                                    <option value="	Robert Johnson">Robert Johnson</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="customerID" class="form-label small fw-bold">Customer ID:</label>
+                                            <input type="email" class="form-control" id="selectCustomerID" placeholder="C001">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="customerName" class="form-label small fw-bold">Customer Email:</label>
+                                            <input type="text" class="form-control" id="SelectCustomerEmail" placeholder="customer@gmail.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="SelectCustomerPhone" class="form-label small fw-bold">Phone:</label>
+                                            <input type="tel" class="form-control" id="SelectCustomerPhone" placeholder="555-123-4567">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="SelectCustomerAddress" class="form-label small fw-bold">Address:</label>
+                                        <textarea class="form-control" id="SelectCustomerAddress" rows="2" autocomplete="on" placeholder="Enter your address here..."></textarea>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Item Select Card -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-primary text-white fw-bold">
+                                    Item Select
+                                </div>
+                                <form id="orderItemSelectForm">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="itemSelect" class="form-label small fw-bold">Item Name:</label>
+                                            <div class="input-group">
+                                                <select class="form-select" id="itemSelect">
+                                                    <option selected>Select Item</option>
+                                                    <option value="Branded T-Shirt">Branded T-Shirt</option>
+                                                    <option value="Leather Wallet">Leather Wallet</option>
+                                                    <option value="Designer Sunglasses">Designer Sunglasses</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="selectItemCode" class="form-label small fw-bold">Item Code:</label>
+                                            <input type="text" class="form-control" id="selectItemCode" placeholder="P001">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="selectItemCategory" class="form-label small fw-bold">Category:</label>
+                                            <input type="text" class="form-control" id="selectItemCategory" placeholder="Apparel">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="itemPrice" class="form-label small fw-bold">Price:</label>
+                                            <input type="text" class="form-control" id="itemPrice" placeholder="Rs.2499.00">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="selectItemQuantity" class="form-label small fw-bold">Order Quantity:</label>
+                                            <input type="number" class="form-control" id="selectItemQuantity" min="1" value="1">
+                                        </div>
+                                        <div class="col-md-6 d-flex align-items-end">
+                                            <button class="btn btn-danger mt-2 w-100">Add Item</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Order Items Table -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="bg-primary text-white table-primary">
+                                    <tr>
+                                        <th>Item Code</th>
+                                        <th>Item Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>P001</td>
+                                        <td>Branded T-Shirt</td>
+                                        <td>Rs. 2,499</td>
+                                        <td>2</td>
+                                        <td>Rs. 4,998</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P002</td>
+                                        <td>Leather Wallet</td>
+                                        <td>Rs. 3,999</td>
+                                        <td>1</td>
+                                        <td>Rs. 3,999</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P003</td>
+                                        <td>Designer Sunglasses</td>
+                                        <td>Rs. 8,499</td>
+                                        <td>1</td>
+                                        <td>Rs. 8,499</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P004</td>
+                                        <td>Wireless Headphones</td>
+                                        <td>Rs. 10,999</td>
+                                        <td>1</td>
+                                        <td>Rs. 10,999</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <nav aria-label="Page navigation">
+                                <div class="page-number mt-2">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link">Previous</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </nav>
+                        </div>
+
+                        <!-- Order Summary Card -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow-sm">
+                                <form id="orderSummaryForm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-primary mb-0">Total: Rs.25000.00</h5>
+                                        <span class="text-danger">Sub Total: Rs.24500.00</span>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <label for="cashAmount" class="form-label small fw-bold">Cash:</label>
+                                            <input type="text" class="form-control" id="cashAmount" placeholder="Rs.25000.00">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="discountAmount" class="form-label small fw-bold">Discount:</label>
+                                            <input type="text" class="form-control" id="discountAmount" placeholder="10">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="discountType" class="form-label small fw-bold">&nbsp;</label>
+                                            <div class="input-group">
+                                                <select class="form-select" id="discountType">
+                                                    <option selected>%</option>
+                                                    <option>Rs</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="balanceAmount" class="form-label small fw-bold">Balance:</label>
+                                        <input type="text" class="form-control" id="balanceAmount" placeholder="Rs.500.00" readonly>
+                                    </div>
+
+                                    <button class="btn btn-success w-100">Purchase</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="orderDetail" class="container section" style="display: none;">
+                <div class=" p-4 bg-box rounded shadow-sm">
+                    <h4 class="Section-topic">Order Management</h4>
+                    <div class="row">
+
+                    </div>
+                </div>
             </section>
 
 
