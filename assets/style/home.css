@@ -183,6 +183,12 @@
     }
 }
 
+@media all and (max-width: 467px) {
+   #resetFieldsBtn{
+       margin-top: 8px;
+   }
+}
+
 
 
 

@@ -31,16 +31,17 @@ function loadCustomerTable() {
     });
 
     //Row selection
-    $('#customer-tbody tr').on('click', function(){
-        $('#customer-tbody tr').removeClass('table-active');//clear previous selection
-        $(this).addClass('table-active');//select current row
+    $('#customer-tbody').on('click', 'tr', function(){
+        $('#customer-tbody tr').removeClass('table-active'); // clear previous selection
+        $(this).addClass('table-active'); // highlight selected row
 
-        selectedCustomerId =$(this).find('td:eq(0)').text().trim();
-        selectedCustomerName =$(this).find('td:eq(1)').text().trim();
+        selectedCustomerId = $(this).find('td:eq(0)').text().trim();
+        selectedCustomerName = $(this).find('td:eq(1)').text().trim();
         console.log("Row selected");
         console.log(selectedCustomerId);
         console.log(selectedCustomerName);
     });
+
 
 }
 
@@ -142,6 +143,7 @@ $('#confirmUpdateBtn').on('click', function(){
         localStorage.setItem("customer_data", JSON.stringify(customers_db));//update the localStorage
         loadCustomerTable();
         $('#updateCustomerModal').modal('hide');
+        $('#searchCustomerBar').val('');
 
         Swal.fire({
             title: "Updated Successfully!",
@@ -190,6 +192,7 @@ $('#confirmDeleteBtn').on('click', function(){
         });
     }
     $('#deleteCustomerModal').modal('hide');
+    $('#searchCustomerBar').val('');
 });
 
 
@@ -199,6 +202,92 @@ function clearCustomerFields() {
     $('#customerEmail').val('');
     $('#phone').val('');
 }
+
+//search customer
+$('#customerSearchBtn').on('click', function () {
+    const searchTerm = $('#searchCustomerBar').val().trim().toLowerCase();
+
+    if (searchTerm === '') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please enter a search term.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
+
+    const filterType = $('#customerFilterCombo').val();
+    let filteredCustomers = [];
+
+    if (filterType === 'Name') {
+        filteredCustomers = customers_db.filter(customer =>
+            customer.customer_name.toLowerCase().includes(searchTerm)
+        );
+    } else if (filterType === 'Email') {
+        filteredCustomers = customers_db.filter(customer =>
+            customer.customer_email.toLowerCase().includes(searchTerm)
+        );
+    } else if (filterType === 'Phone') {
+        filteredCustomers = customers_db.filter(customer =>
+            customer.customer_phone.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    if (filteredCustomers.length === 0) {
+        Swal.fire({
+            title: 'No Results!',
+            text: 'No customers found matching that search term.',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
+
+    // Clear current table
+    $('#customer-tbody').empty();
+
+    const headers = [];
+    $('#customerTable th').each(function () {
+        headers.push($(this).text());
+    });
+
+    // Load only filtered customers
+    filteredCustomers.forEach(customer => {
+        const row = `
+           
+            <tr>
+            <td data-label="${headers[0]}">${customer.customer_id}</td>
+            <td data-label="${headers[1]}">${customer.customer_name}</td>
+            <td data-label="${headers[2]}">${customer.customer_email}</td>
+            <td data-label="${headers[3]}">${customer.customer_phone}</td>
+            </tr>
+        `;
+        $('#customer-tbody').append(row);
+    });
+
+
+});
+
+
+//reset button action
+$('#resetFieldsBtn').on('click', function(){
+    $('#searchCustomerBar').val('');
+    $('#customerFilterCombo').val('Name');
+    loadCustomerTable();
+
+    const headers = document.querySelectorAll('#customerTable th');
+    const rows = document.querySelectorAll('#customer-tbody tr');
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach((cell, index) => {
+            if (headers[index]) {
+                cell.setAttribute('data-label', headers[index].innerText);
+            }
+        });
+    });
+});
 
 
 //add data-label attribute to each cell
