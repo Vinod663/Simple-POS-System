@@ -358,19 +358,19 @@
                                                     <input type="text" class="form-control" id="itemName">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="Item-category" class="form-label">Category:</label>
-                                                    <input type="email" class="form-control" id="Item-category">
+                                                    <label for="ItemCategory" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="ItemCategory">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="quantity" class="form-label">Quantity:</label>
-                                                    <input type="tel" class="form-control" id="quantity">
+                                                    <label for="itemQty" class="form-label">Quantity:</label>
+                                                    <input type="number" class="form-control" id="itemQty">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="price" class="form-label">Price:</label>
-                                                    <input type="tel" class="form-control" id="price">
+                                                    <label for="itemSavePrice" class="form-label">Price:</label>
+                                                    <input type="text" class="form-control" id="itemSavePrice">
                                                 </div>
                                                 <div class="d-grid gap-2">
-                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                    <button type="submit" class="btn btn-success" id="saveItemBtn">Save</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -379,7 +379,7 @@
                             </div>
 
                             <!-- Update Item Button that triggers the modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateItemModal">
+                            <button type="button" class="btn btn-primary"  id="updateItemBtn">
                                 Update
                             </button>
 
@@ -395,7 +395,7 @@
                                             <form id="updateItemForm">
                                                 <div class="mb-3">
                                                     <label for="updateItemId" class="form-label">Item Code:</label>
-                                                    <input type="text" class="form-control" id="updateItemId" readonly>
+                                                    <input type="text" class="form-control" id="updateItemId" readonly >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="updateItemName" class="form-label">Item Name:</label>
@@ -403,18 +403,18 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="updateItemCategory" class="form-label">Category:</label>
-                                                    <input type="email" class="form-control" id="updateItemCategory">
+                                                    <input type="text" class="form-control" id="updateItemCategory">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="updateQuantity" class="form-label">Quantity:</label>
-                                                    <input type="tel" class="form-control" id="updateQuantity">
+                                                    <input type="number" class="form-control" id="updateQuantity">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="updatePrice" class="form-label">Price:</label>
-                                                    <input type="tel" class="form-control" id="updatePrice">
+                                                    <input type="text" class="form-control" id="updatePrice">
                                                 </div>
                                                 <div class="d-grid gap-2">
-                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                    <button type="submit" class="btn btn-primary" id="confirmItemUpdateBtn">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -423,7 +423,7 @@
                             </div>
 
                             <!-- Delete Item Button that triggers the modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal">
+                            <button type="button" class="btn btn-danger"  id="deleteItemBtn">
                                 Delete
                             </button>
 
@@ -444,8 +444,8 @@
                                             <p>Are you sure you want to delete this Item?</p>
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <p class="mb-0"><strong>Item Code:</strong> <span id="deleteItemId">P001</span></p>
-                                                    <p class="mb-0"><strong>Item Name:</strong> <span id="deleteItemName">Branded T-Shirt</span></p>
+                                                    <p class="mb-0"><strong>Item Code:</strong> <span id="deleteItemId"></span></p>
+                                                    <p class="mb-0"><strong>Item Name:</strong> <span id="deleteItemName"></span></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -457,12 +457,16 @@
                                     </form>
                                 </div>
                             </div>
+
+                            <button type="button" class="btn bg-warning" id="itemResetBtn" >
+                                Reset
+                            </button>
                         </div>
 
                         <!-- Item Table -->
                         <div class="table-responsive-card-list">
                             <div class="item-table mt-4">
-                                <table class="table table-hover">
+                                <table class="table table-hover" id="itemTable">
                                     <thead class="table-primary">
                                     <tr>
                                         <th>Item Code</th>
@@ -472,8 +476,8 @@
                                         <th>Price</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr data-id="P001">
+                                    <tbody id="item-tbody">
+                                    <!--<tr data-id="P001">
                                         <td data-label="Item Code">P001</td>
                                         <td data-label="Item Name">Branded T-Shirt</td>
                                         <td data-label="Category">Apparel</td>
@@ -514,7 +518,7 @@
                                         <td data-label="Category">Bags</td>
                                         <td data-label="Quantity">90</td>
                                         <td data-label="Price">Rs.3,400</td>
-                                    </tr>
+                                    </tr>-->
 
                                     </tbody>
                                 </table>
@@ -1074,6 +1078,7 @@
             <script src="../assets/lib/fontawesome/js/all.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script type="module" src="../controller/CustomerController.js"></script>
+            <script type="module" src="../controller/ItemController.js"></script>
             <script>
                 function showSection(sectionId) {
                     document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');

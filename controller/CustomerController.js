@@ -151,6 +151,14 @@ $('#confirmUpdateBtn').on('click', function(){
             draggable: true
         });
     }
+    else {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Customer not found.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
 });
 
 
@@ -202,6 +210,7 @@ function clearCustomerFields() {
     $('#customerEmail').val('');
     $('#phone').val('');
 }
+
 
 //search customer
 $('#customerSearchBtn').on('click', function () {
