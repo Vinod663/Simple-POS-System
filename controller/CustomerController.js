@@ -10,6 +10,7 @@ if (savedCustomers) {
     customers_db.push(...JSON.parse(savedCustomers));//...->spread operator(spreads out all the items from an array one by one.), JSON.parse() = Convert text back to array
 }
 loadCustomerTable();
+addDataLabel();
 
 //load customer table
 function loadCustomerTable() {
@@ -85,6 +86,7 @@ $('#saveCustomerBtn').on('click', function(){
     console.log(customers_db);
     loadCustomerTable();
     clearCustomerFields();
+    addDataLabel();
     Swal.fire({
         title: "Added Successfully!",
         icon: "success",
@@ -159,6 +161,7 @@ $('#confirmUpdateBtn').on('click', function(){
             confirmButtonText: 'Ok'
         });
     }
+    addDataLabel();
 });
 
 
@@ -201,6 +204,7 @@ $('#confirmDeleteBtn').on('click', function(){
     }
     $('#deleteCustomerModal').modal('hide');
     $('#searchCustomerBar').val('');
+    addDataLabel();
 });
 
 
@@ -284,7 +288,25 @@ $('#resetFieldsBtn').on('click', function(){
     $('#searchCustomerBar').val('');
     $('#customerFilterCombo').val('Name');
     loadCustomerTable();
+    addDataLabel();
 
+});
+
+
+//add data-label attribute to each cell
+/*const headers = document.querySelectorAll('#customerTable th');
+const rows = document.querySelectorAll('#customer-tbody tr');
+
+rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    cells.forEach((cell, index) => {
+        if (headers[index]) {
+            cell.setAttribute('data-label', headers[index].innerText);
+        }
+    });
+});*/
+
+function addDataLabel(){
     const headers = document.querySelectorAll('#customerTable th');
     const rows = document.querySelectorAll('#customer-tbody tr');
 
@@ -296,21 +318,7 @@ $('#resetFieldsBtn').on('click', function(){
             }
         });
     });
-});
-
-
-//add data-label attribute to each cell
-const headers = document.querySelectorAll('#customerTable th');
-const rows = document.querySelectorAll('#customer-tbody tr');
-
-rows.forEach(row => {
-    const cells = row.querySelectorAll('td');
-    cells.forEach((cell, index) => {
-        if (headers[index]) {
-            cell.setAttribute('data-label', headers[index].innerText);
-        }
-    });
-});
+}
 
 
 

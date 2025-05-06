@@ -10,6 +10,7 @@ if (savedItems) {
     items_db.push(...JSON.parse(savedItems));//...->spread operator(spreads out all the items from an array one by one.), JSON.parse() = Convert text back to array
 }
 loadItemTable();
+addDataLabel();
 
 function loadItemTable() {
     $('#item-tbody').empty();
@@ -67,9 +68,9 @@ $('#saveItemBtn').on('click', function(){
     const exits=items_db.find(item => item.item_id === id);
     if (exits) {
         Swal.fire({
-            title: 'Error!',
+            title: 'Duplicate ID!',
             text: 'Item ID already exists',
-            icon: 'error',
+            icon: 'warning',
             confirmButtonText: 'Ok'
         });
         return;
@@ -83,6 +84,7 @@ $('#saveItemBtn').on('click', function(){
     console.log(items_db);
     loadItemTable();
     clearItemFields();
+    addDataLabel();
     Swal.fire({
         title: "Added Successfully!",
         icon: "success",
@@ -168,6 +170,7 @@ $('#confirmItemUpdateBtn').on('click', function(){
             confirmButtonText: 'Ok'
         });
     }
+    addDataLabel();
 });
 
 //delete item
@@ -204,6 +207,7 @@ $('#confirmItemDeleteBtn').on('click', function() {
         });
         $('#deleteItemModal').modal('hide');
         $('#searchItemBar').val('');
+        addDataLabel();
     }
 });
 
@@ -276,7 +280,25 @@ $('#itemResetBtn').on('click', function(){
     $('#searchItemBar').val('');
     $('#itemFilterCombo').val('Name');
     loadItemTable();
+    addDataLabel();
 
+});
+
+
+//add data-label attribute to each cell
+/*const headers = document.querySelectorAll('#itemTable th');
+const rows = document.querySelectorAll('#itemTable tr');
+
+rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    cells.forEach((cell, index) => {
+        if (headers[index]) {
+            cell.setAttribute('data-label', headers[index].innerText);
+        }
+    });
+});*/
+
+function addDataLabel(){
     const headers = document.querySelectorAll('#itemTable th');
     const rows = document.querySelectorAll('#itemTable tr');
 
@@ -288,19 +310,4 @@ $('#itemResetBtn').on('click', function(){
             }
         });
     });
-
-});
-
-
-//add data-label attribute to each cell
-const headers = document.querySelectorAll('#itemTable th');
-const rows = document.querySelectorAll('#itemTable tr');
-
-rows.forEach(row => {
-    const cells = row.querySelectorAll('td');
-    cells.forEach((cell, index) => {
-        if (headers[index]) {
-            cell.setAttribute('data-label', headers[index].innerText);
-        }
-    });
-});
+}
