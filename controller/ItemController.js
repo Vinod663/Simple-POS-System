@@ -208,6 +208,67 @@ $('#confirmItemDeleteBtn').on('click', function() {
 });
 
 //Search item
+$('#itemSearchBtn').on('click', function() {
+    const searchTerm= $('#searchItemBar').val().toLowerCase();
+
+    if (searchTerm === '') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please enter a search term.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
+    const filterOption = $('#itemFilterCombo').val();
+    let filteredItems = [];
+
+    if (filterOption === 'Name') {
+        filteredItems = items_db.filter(item =>
+            item.item_name.toLowerCase().includes(searchTerm)
+        );
+    }
+    else if (filterOption === 'Category') {
+        filteredItems = items_db.filter(item =>
+            item.item_category.toLowerCase().includes(searchTerm)
+        );
+    }
+    else if(filterOption === 'ID') {
+        filteredItems = items_db.filter(item =>
+            item.item_id.toString().includes(searchTerm)
+        );
+    }
+    if (filteredItems.length === 0) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'No items found',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
+
+    $('#item-tbody').empty();
+
+    const headers=[];
+    $('#itemTable th').each(function() {
+        headers.push($(this).text());
+    });
+
+    filteredItems.forEach(item => {
+        const rows = `
+            <tr>
+             <td data-label="${headers[0]}">${item.item_id}</td>
+             <td data-label="${headers[1]}">${item.item_name}</td>
+             <td data-label="${headers[2]}">${item.item_category}</td>
+             <td data-label="${headers[3]}">${item.item_qty}</td>
+             <td data-label="${headers[4]}">${item.item_price}</td>
+            </tr>
+        `;
+        $('#item-tbody').append(rows);
+    })
+});
+
 
 
 //reset button item
