@@ -10,6 +10,7 @@ if (savedCustomers) {
     customers_db.push(...JSON.parse(savedCustomers));//...->spread operator(spreads out all the items from an array one by one.), JSON.parse() = Convert text back to array
 }
 loadCustomerTable();
+loadCustomersToComboBox();
 addDataLabel();
 
 //load customer table
@@ -85,6 +86,7 @@ $('#saveCustomerBtn').on('click', function(){
 
     console.log(customers_db);
     loadCustomerTable();
+    loadCustomersToComboBox();
     clearCustomerFields();
     addDataLabel();
     Swal.fire({
@@ -144,6 +146,7 @@ $('#confirmUpdateBtn').on('click', function(){
 
         localStorage.setItem("customer_data", JSON.stringify(customers_db));//update the localStorage
         loadCustomerTable();
+        loadCustomersToComboBox();
         $('#updateCustomerModal').modal('hide');
         $('#searchCustomerBar').val('');
 
@@ -195,6 +198,7 @@ $('#confirmDeleteBtn').on('click', function(){
         customers_db.splice(index, 1);
         localStorage.setItem("customer_data", JSON.stringify(customers_db));//save to localStorage
         loadCustomerTable();
+        loadCustomersToComboBox();
 
         Swal.fire({
             title: "Deleted Successfully!",
@@ -319,6 +323,35 @@ function addDataLabel(){
         });
     });
 }
+
+function loadCustomersToComboBox(){
+    $('#customerSelect').empty();
+    customers_db.map((customer, index) => {
+        let id = customer.customer_id;
+        let name = customer.customer_name;
+
+        let data = `<option value="${id}">${name}</option>
+                    <option value="" selected disabled hidden>Select Customer</option>
+                    `
+
+        $('#customerSelect').append(data);
+    });
+}
+
+$('#customerSelect').on('change', function(){
+    const selectedCustomerId = $(this).val();
+    const selectedCustomer = customers_db.find(customer => customer.customer_id === selectedCustomerId);
+
+    if (selectedCustomer) {
+        $('#selectCustomerID').val(selectedCustomer.customer_id);
+        $('#SelectCustomerEmail').val(selectedCustomer.customer_email);
+        $('#SelectCustomerPhone').val(selectedCustomer.customer_phone);
+    } else {
+        $('#selectCustomerID').val('');
+        $('#SelectCustomerEmail').val('');
+        $('#SelectCustomerPhone').val('');
+    }
+});
 
 
 

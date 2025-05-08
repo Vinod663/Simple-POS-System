@@ -1,4 +1,4 @@
-import {items_db} from "../db/db.js";
+import {customers_db, items_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
 
 let selectedItemId=null;
@@ -10,6 +10,7 @@ if (savedItems) {
     items_db.push(...JSON.parse(savedItems));//...->spread operator(spreads out all the items from an array one by one.), JSON.parse() = Convert text back to array
 }
 loadItemTable();
+loadItemToComboBox();
 addDataLabel();
 
 function loadItemTable() {
@@ -83,6 +84,7 @@ $('#saveItemBtn').on('click', function(){
 
     console.log(items_db);
     loadItemTable();
+    loadItemToComboBox();
     clearItemFields();
     addDataLabel();
     Swal.fire({
@@ -154,6 +156,7 @@ $('#confirmItemUpdateBtn').on('click', function(){
 
         localStorage.setItem("item_data", JSON.stringify(items_db));//save to localStorage
         loadItemTable();
+        loadItemToComboBox();
         $('#updateItemModal').modal('hide');
         $('#searchItemBar').val('');
         Swal.fire({
@@ -199,6 +202,7 @@ $('#confirmItemDeleteBtn').on('click', function() {
         items_db.splice(itemIndex, 1); // remove the item from the array
         localStorage.setItem("item_data", JSON.stringify(items_db));//save to localStorage
         loadItemTable();
+        loadItemToComboBox();
 
         Swal.fire({
             title: "Deleted Successfully!",
@@ -311,3 +315,33 @@ function addDataLabel(){
         });
     });
 }
+
+function loadItemToComboBox(){
+    $('#itemSelect').empty();
+    items_db.map((item, index) => {
+        let id = item.item_id;
+        let name = item.item_name;
+
+        let data = `<option value="${id}">${name}</option>
+                           <option value="" selected disabled hidden>Select item</option>
+                          `
+
+        $('#itemSelect').append(data);
+
+    });
+}
+
+$('#itemSelect').on('change', function() {
+    const selectedItemId = $(this).val();
+    const selectedItem = items_db.find(item => item.item_id === selectedItemId);
+
+    if (selectedItem) {
+        $('#selectItemCode').val(selectedItem.item_id);
+        $('#selectItemCategory').val(selectedItem.item_category);
+        $('#itemPrice').val(selectedItem.item_price);
+    } else {
+        $('#selectItemCode').val('');
+        $('#selectItemCategory').val('');
+        $('#itemPrice').val('');
+    }
+});
