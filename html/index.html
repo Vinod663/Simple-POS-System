@@ -656,7 +656,7 @@
                                             <input type="number" class="form-control" id="selectItemQuantity" min="1" value="1">
                                         </div>
                                         <div class="col-md-6 d-flex align-items-end">
-                                            <button class="btn btn-danger mt-2 w-100">Add Item</button>
+                                            <button class="btn btn-danger mt-2 w-100" id="addItemBtn">Add Item</button>
                                         </div>
                                     </div>
                                 </div>
@@ -675,9 +675,10 @@
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="order-tbody">
                                     <!--<tr>
                                         <td>P001</td>
                                         <td>Branded T-Shirt</td>
@@ -736,8 +737,8 @@
                                 <form id="orderSummaryForm">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="text-primary mb-0">Total: Rs.25000.00</h5>
-                                        <span class="text-danger">Sub Total: Rs.24500.00</span>
+                                        <h5 class="text-primary mb-0" id="totalAmount">Total: Rs.0.00</h5>
+                                        <span class="text-danger" id="subTotalAmount">Sub Total: Rs.0.00</span>
                                     </div>
 
                                     <div class="row mb-3">
@@ -745,20 +746,22 @@
                                             <label for="cashAmount" class="form-label small fw-bold">Cash:</label>
                                             <input type="text" class="form-control" id="cashAmount" placeholder="Rs.25000.00">
                                         </div>
-                                        <div class="col-3">
-                                            <label for="discountAmount" class="form-label small fw-bold">Discount:</label>
-                                            <input type="text" class="form-control" id="discountAmount" placeholder="10">
-                                        </div>
-                                        <div class="col-3">
-                                            <label for="discountType" class="form-label small fw-bold">&nbsp;</label>
+
+                                        <div class="col-6">
+                                            <label class="form-label small fw-bold">Discount:</label>
                                             <div class="input-group">
-                                                <select class="form-select" id="discountType">
+                                                <input type="text" class="form-control" id="discountAmount" placeholder="10">
+                                                <select class="form-select" id="discountType" style="max-width: 80px;">
                                                     <option selected>%</option>
                                                     <option>Rs</option>
                                                 </select>
+                                                <button type="button" class="btn btn-sm btn-success add-discount" id="discountBtn">
+                                                    <i class="fa-solid fa-check" style="color: #ffffff;"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
+
 
                                     <div class="mb-3">
                                         <label for="balanceAmount" class="form-label small fw-bold">Balance:</label>
@@ -938,23 +941,17 @@
                                                                     <span class="text-danger">Sub Total: Rs.24500.00</span>
                                                                 </div>
 
-                                                                <div class="row mb-3">
-                                                                    <div class="col-6">
-                                                                        <label for="newCashAmount" class="form-label small fw-bold">Cash:</label>
-                                                                        <input type="text" class="form-control" id="newCashAmount" placeholder="Rs.25000.00">
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="newDiscountAmount" class="form-label small fw-bold">Discount:</label>
-                                                                        <input type="text" class="form-control" id="newDiscountAmount" placeholder="10">
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="newDiscountType" class="form-label small fw-bold">&nbsp;</label>
-                                                                        <div class="input-group">
-                                                                            <select class="form-select" id="newDiscountType">
-                                                                                <option selected>%</option>
-                                                                                <option>Rs</option>
-                                                                            </select>
-                                                                        </div>
+                                                                <div class="col-12">
+                                                                    <label class="form-label small fw-bold">Discount:</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" id="discountAmountUpdate" placeholder="10">
+                                                                        <select class="form-select" id="discountTypeUpdate" style="max-width: 80px;">
+                                                                            <option selected>%</option>
+                                                                            <option>Rs</option>
+                                                                        </select>
+                                                                        <button type="button" class="btn btn-sm btn-success add-discount" id="discountBtnUpdate">
+                                                                            <i class="fa-solid fa-check" style="color: #ffffff;"></i>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
 
@@ -1079,6 +1076,7 @@
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script type="module" src="../controller/CustomerController.js"></script>
             <script type="module" src="../controller/ItemController.js"></script>
+            <script type="module" src="../controller/OrderController.js"></script>
             <script>
                 function showSection(sectionId) {
                     document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
