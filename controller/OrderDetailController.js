@@ -122,5 +122,5 @@ $('#orderResetBtn').on('click', function() {
     $('#searchOrderBar').val('');
     $('#orderFilterCombo').val('Order-ID');
     loadOrderDetailTable();
-    addDataLabel()//
+    addDataLabel();
 });
