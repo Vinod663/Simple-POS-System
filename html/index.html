@@ -768,7 +768,7 @@
                                         <input type="text" class="form-control" id="balanceAmount" placeholder="Rs.500.00" readonly>
                                     </div>
 
-                                    <button class="btn btn-success w-100">Purchase</button>
+                                    <button class="btn btn-success w-100" id="purchaseBtn">Purchase</button>
                                 </div>
                                 </form>
                             </div>
@@ -1002,7 +1002,7 @@
                         <!--Order-Detail Table-->
                         <div class="table-responsive-card-list">
                             <div class="order-table mt-4">
-                                <table class="table table-hover">
+                                <table class="table table-hover" id="orderDetailTable">
                                     <thead class="table-primary">
                                     <tr>
                                         <th>Order ID</th>
@@ -1013,8 +1013,8 @@
                                         <th>Total</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr data-id="ORD-1006">
+                                    <tbody id="orderDetail-tbody">
+                                    <!--<tr data-id="ORD-1006">
                                         <td data-label="Order ID">ORD-1006</td>
                                         <td data-label="Customer ID">C001</td>
                                         <td data-label="Customer Name">John Smith</td>
@@ -1037,7 +1037,7 @@
                                         <td data-label="Date">02/04/2022</td>
                                         <td data-label="Items">4</td>
                                         <td data-label="Total">Rs. 31,750.00</td>
-                                    </tr>
+                                    </tr>-->
 
 
                                     </tbody>

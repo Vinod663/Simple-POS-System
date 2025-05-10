@@ -1,8 +1,10 @@
 export default class OrderModel {
-    constructor(ord_id, cust_id, cust_name, ord_date, ord_items=[], total_amount,subtotal,cash,change,discount,discount_type) {
+    constructor(ord_id, cust_id, cust_name, cust_email, cust_phone, ord_date, ord_items=[], total_amount,subtotal,cash,change,discount,discount_type) {
         this.order_id = ord_id;
         this.customer_id = cust_id;
         this.customer_name = cust_name;
+        this.customer_email = cust_email;
+        this.customer_phone = cust_phone;
         this.order_date = ord_date;
         this.order_items = ord_items;
 

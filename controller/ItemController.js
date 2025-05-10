@@ -243,7 +243,7 @@ $('#itemSearchBtn').on('click', function() {
     }
     else if(filterOption === 'ID') {
         filteredItems = items_db.filter(item =>
-            item.item_id.toString().includes(searchTerm)
+            item.item_id.toString().toLowerCase().includes(searchTerm)
         );
     }
     if (filteredItems.length === 0) {
