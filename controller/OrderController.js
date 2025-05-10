@@ -5,6 +5,7 @@ const orderItems = [];
 let fullTotal = 0;
 let subTotal=0
 
+orders_db.length = 0; // Clear the orders_db array
 const savedOrders= localStorage.getItem("order_data");
 if (savedOrders) {
     orders_db.push(...JSON.parse(savedOrders));//...->spread operator(spreads out all the items from an array one by one.), JSON.parse() = Convert text back to array

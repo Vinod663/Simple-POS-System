@@ -784,16 +784,16 @@
                     <h4 class="Section-topic">Order Management</h4>
                     <div class="row">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Order by Order-ID, Customer-ID  or Date" id="serachOrderBar">
+                            <input type="text" class="form-control" placeholder="Search Order by Order-ID, Customer-Name  or Date" id="searchOrderBar">
                             <div class="input-group-append">
                                 <select class="form-select border-start-0" id="orderFilterCombo">
                                     <option>Order-ID</option>
-                                    <option>Customer-ID</option>
+                                    <option>Customer-Name</option>
                                     <option>Date</option>
                                 </select>
                             </div>
                             <div class="col-md-2 ms-2">
-                                <button class="btn btn-primary w-100">Search</button>
+                                <button class="btn btn-primary w-100" id="orderSearchBtn">Search</button>
                             </div>
                         </div>
 
@@ -995,6 +995,10 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <button type="button" class="btn bg-warning" id="orderResetBtn" >
+                                Reset
+                            </button>
                         </div>
 
 
@@ -1077,6 +1081,7 @@
             <script type="module" src="../controller/CustomerController.js"></script>
             <script type="module" src="../controller/ItemController.js"></script>
             <script type="module" src="../controller/OrderController.js"></script>
+            <script type="module" src="../controller/OrderDetailController.js"></script>
             <script>
                 function showSection(sectionId) {
                     document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
