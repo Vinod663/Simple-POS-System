@@ -225,6 +225,90 @@ function loadItemToComboBox(){
                           `
 
         $('#itemSelect').append(data);
+        $('#newItemSelect').append(data);
 
     });
 }
+
+
+$('#customerUpdate').on('change', function(){
+    const selectedCustomerId = $(this).val();
+    const selectedCustomer = customers_db.find(customer => customer.customer_id === selectedCustomerId);
+
+    if (selectedCustomer) {
+        $('#updateCustomerIDInOrder').val(selectedCustomer.customer_id);
+
+    } else {
+        $('#updateCustomerIDInOrder').val('');
+
+    }
+});
+
+$('#newItemSelect').on('change', function() {
+    const selectedItemId = $(this).val();
+    const selectedItem = items_db.find(item => item.item_id === selectedItemId);
+
+    if (selectedItem) {
+        $('#newItemCode').val(selectedItem.item_id);
+        $('#itemPriceUpdate').val(selectedItem.item_price);
+    } else {
+        $('#newItemCode').val('');
+        $('#itemPriceUpdate').val('');
+    }
+});
+
+//Update Order
+$('#updateOrderBtn').on('click', function() {
+    if (selectedOrderId === null) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please select an order to update.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
+    const order= orders_db.find(order => order.order_id === selectedOrderId);
+    $('#updateOrderID').val(order.order_id);
+    $('#UpdateOrderDate').val(order.order_date);
+    $('#customerUpdate').val(order.customer_id);
+    $('#updateCustomerIDInOrder').val(order.customer_id);
+
+    //populate the item table
+    $('#updateOrderTbody').empty();
+    order.order_items.map((item, index) => {
+        let id = item.itemId;
+        let name = item.itemName;
+        let price = item.itemPrice;
+        let qty = item.itemQty;
+        let total=item.itemTotalPrice
+
+        let data = `<tr>
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${price}</td>
+                        <td>${qty}</td>
+                        <td>${total}</td>
+                        <td>
+                        <button type="button" class="btn btn-sm btn-danger remove-item">
+                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                        </button>
+                        </td>
+                          </tr>`
+
+        $('#updateOrderTbody').append(data);
+    });
+
+    $('#UpdateTotal').text("Total: Rs."+order.total_order_amount+".00");
+    $('#UpdateSubTotal').text("Sub Total: Rs."+order.order_subtotal+".00");
+    $('#discountAmountUpdate').val(order.order_discount);
+    $('#discountTypeUpdate').val(order.order_discount_type);
+    $('#updateCashAmount').val(order.order_cash);
+    $('#newBalanceAmount').val(order.order_change);
+
+
+
+
+    //show the modal
+    $('#updateOrderModal').modal('show');
+});
