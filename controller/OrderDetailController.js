@@ -1,6 +1,8 @@
 import {items_db, orders_db, customers_db} from "../db/db.js";
 import OrderModel from "../model/OrderModel.js";
 
+let selectedOrderId = null;
+
 orders_db.length = 0; // Clear the orders_db array
 const savedOrders= localStorage.getItem("order_data");
 if (savedOrders) {
@@ -124,3 +126,105 @@ $('#orderResetBtn').on('click', function() {
     loadOrderDetailTable();
     addDataLabel();
 });
+
+
+//Row selection
+$('#orderDetailTable').on('click', 'tr', function() {
+    $('#orderDetail-tbody tr').removeClass('table-active');
+    $(this).addClass('table-active');
+
+    selectedOrderId = $(this).find('td:eq(0)').text().trim();
+    console.log("Row selected:", selectedOrderId);
+
+});
+
+//Delete Order
+$('#deleteOrderBtn').on('click', function() {
+    if (selectedOrderId === null) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please select an order to delete.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+        $('#deleteOrderModal').modal('hide');
+        return;
+    }
+    $('#deleteOrderId').text(selectedOrderId);
+    $('#deleteOrderModal').modal('show');
+});
+
+//confirm delete order
+$('#confirmDeleteOrderBtn').on('click', function() {
+    const orderIndex = orders_db.findIndex(order => order.order_id === selectedOrderId);
+    if (orderIndex !== -1) {
+        restoreItemQty(orders_db[orderIndex].order_items);
+        orders_db.splice(orderIndex, 1);
+        localStorage.setItem("order_data", JSON.stringify(orders_db));
+        loadOrderDetailTable();
+        addDataLabel();
+        loadItemTable();
+        loadItemToComboBox();
+        Swal.fire({
+            title: 'Success!',
+            text: 'Order deleted successfully.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        });
+    }
+    else {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Order not found.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+    $('#deleteOrderModal').modal('hide');
+});
+
+function restoreItemQty(items) {
+    items.forEach(item => {
+        const itemIndex = items_db.findIndex(i => i.item_id === item.itemId);
+        if (itemIndex !== -1) {
+            items_db[itemIndex].item_qty = parseInt(items_db[itemIndex].item_qty) + parseInt(item.itemQty);
+        }
+    });
+    localStorage.setItem("item_data", JSON.stringify(items_db));
+}
+
+function loadItemTable() {
+    $('#item-tbody').empty();
+    items_db.map((item, index) => {
+        let id = item.item_id;
+        let name = item.item_name;
+        let category = item.item_category;
+        let qty = item.item_qty;
+        let price = item.item_price;
+
+        let data = `<tr>
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${category}</td>
+                        <td>${qty}</td>
+                        <td>${price}</td>
+                   </tr>`
+
+        $('#item-tbody').append(data);
+    });
+}
+
+function loadItemToComboBox(){
+    $('#itemSelect').empty();
+    items_db.map((item, index) => {
+        let id = item.item_id;
+        let name = item.item_name;
+
+        let data = `<option value="${id}">${name}</option>
+                           <option value="" selected disabled hidden>Select item</option>
+                          `
+
+        $('#itemSelect').append(data);
+
+    });
+}
