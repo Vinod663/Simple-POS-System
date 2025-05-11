@@ -335,6 +335,7 @@ function loadCustomersToComboBox(){
                     `
 
         $('#customerSelect').append(data);
+        $('#customerUpdate').append(data);
     });
 }
 

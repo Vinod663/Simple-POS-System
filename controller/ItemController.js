@@ -327,6 +327,7 @@ function loadItemToComboBox(){
                           `
 
         $('#itemSelect').append(data);
+        $('#newItemSelect').append(data);
 
     });
 }
