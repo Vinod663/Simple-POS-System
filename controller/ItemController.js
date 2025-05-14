@@ -50,21 +50,60 @@ function loadItemTable() {
 
 //save item
 $('#saveItemBtn').on('click', function(){
-    let id = $('#itemId').val();
-    let name = $('#itemName').val();
-    let category = $('#ItemCategory').val();
-    let qty = $('#itemQty').val();
-    let price = $('#itemSavePrice').val();
+    let id = $('#itemId').val().trim();
+    let name = $('#itemName').val().trim();
+    let category = $('#ItemCategory').val().trim();
+    let qty = $('#itemQty').val().trim();
+    let price = $('#itemSavePrice').val().trim();
+
+    $('#itemIdError').text('');
+    $('#itemId').css('border-color', '');
+    $('#itemNameError').text('');
+    $('#itemName').css('border-color', '');
+    $('#itemCatError').text('');
+    $('#ItemCategory').css('border-color', '');
+    $('#itemPriceError').text('');
+    $('#itemSavePrice').css('border-color', '');
+    let hasError = false;
 
     if (id === '' || name === '' || category === '' || qty === '' || price === '') {
         Swal.fire({
             title: 'Error!',
-            text: 'Invalid Inputs',
+            text: 'Invalid Inputs! Fill all fields',
             icon: 'error',
             confirmButtonText: 'Ok'
         });
         return
     }
+
+    if (!/^M\d{3}$/.test(id)) {
+        $('#itemIdError').text('ID must be like M001');
+        $('#itemId').css('border-color', 'red');
+        hasError = true;
+    }
+
+    // Name: letters, spaces, hyphens, 3–30 characters
+    if (!/^[A-Za-z\s\-]{3,30}$/.test(name)) {
+        $('#itemNameError').text('Name must be 3–30 letters only');
+        $('#itemName').css('border-color', 'red');
+        hasError = true;
+    }
+
+// Category: same as name
+    if (!/^[A-Za-z\s\-]{3,30}$/.test(category)) {
+        $('#itemCatError').text('Category must be 3–30 letters only');
+        $('#ItemCategory').css('border-color', 'red');
+        hasError = true;
+    }
+
+// Price: must match 'Rs.100.00' format
+    if (!/^Rs\.\d+\.\d{2}$/.test(price)) {
+        $('#itemPriceError').text('Price must be like Rs.100.00');
+        $('#itemSavePrice').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (hasError) return;
 
     const exits=items_db.find(item => item.item_id === id);
     if (exits) {
@@ -115,6 +154,13 @@ $('#updateItemBtn').on('click', function(){
         return;
     }
 
+    $('#updateItemNameError').text('');
+    $('#updateItemName').css('border-color', '');
+    $('#updateItemCatError').text('');
+    $('#updateItemCategory').css('border-color', '');
+    $('#updateItemPriceError').text('');
+    $('#updatePrice').css('border-color', '');
+
     // Show modal and fill in item info
     const item = items_db.find(item => item.item_id === selectedItemId);
     $('#updateItemId').val(item.item_id);
@@ -129,21 +175,52 @@ $('#updateItemBtn').on('click', function(){
 
 //confirm update
 $('#confirmItemUpdateBtn').on('click', function(){
-    const id = $('#updateItemId').val();
-    const name = $('#updateItemName').val();
-    const category = $('#updateItemCategory').val();
-    const qty = $('#updateQuantity').val();
-    const price = $('#updatePrice').val();
+    const id = $('#updateItemId').val().trim();
+    const name = $('#updateItemName').val().trim();
+    const category = $('#updateItemCategory').val().trim();
+    const qty = $('#updateQuantity').val().trim();
+    const price = $('#updatePrice').val().trim();
+
+    $('#updateItemNameError').text('');
+    $('#updateItemName').css('border-color', '');
+    $('#updateItemCatError').text('');
+    $('#updateItemCategory').css('border-color', '');
+    $('#updateItemPriceError').text('');
+    $('#updatePrice').css('border-color', '');
+    let hasError = false;
 
     if (id === '' || name === '' || category === '' || qty === '' || price === '') {
         Swal.fire({
             title: 'Error!',
-            text: 'Invalid Inputs',
+            text: 'Invalid Inputs! Fill all fields',
             icon: 'error',
             confirmButtonText: 'Ok'
         });
         return;
     }
+
+    // Name: letters, spaces, hyphens, 3–30 characters
+    if (!/^[A-Za-z\s\-]{3,30}$/.test(name)) {
+        $('#updateItemNameError').text('Name must be 3–30 letters only');
+        $('#updateItemName').css('border-color', 'red');
+        hasError = true;
+    }
+
+// Category: same as name
+    if (!/^[A-Za-z\s\-]{3,30}$/.test(category)) {
+        $('#updateItemCatError').text('Category must be 3–30 letters only');
+        $('#updateItemCategory').css('border-color', 'red');
+        hasError = true;
+    }
+
+// Price: must match 'Rs.100.00' format
+    if (!/^Rs\.\d+\.\d{2}$/.test(price)) {
+        $('#updateItemPriceError').text('Price must be like Rs.100.00');
+        $('#updatePrice').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (hasError) return;
 
     //Update item data
     const itemIndex = items_db.findIndex(item => item.item_id === selectedItemId);
