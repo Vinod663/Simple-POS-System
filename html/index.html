@@ -136,18 +136,22 @@
                                                 <div class="mb-3">
                                                     <label for="customerId" class="form-label">Customer ID:</label>
                                                     <input type="text" class="form-control" id="customerId">
+                                                    <small id="custIdError" style="color:red;"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="customerName" class="form-label">Customer Name:</label>
                                                     <input type="text" class="form-control" id="customerName">
+                                                    <small id="custNameError" style="color:red;"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="customerEmail" class="form-label">Customer Email:</label>
                                                     <input type="email" class="form-control" id="customerEmail">
+                                                    <small id="custEmailError" style="color:red;"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label">Phone:</label>
                                                     <input type="tel" class="form-control" id="phone" autocomplete="tel">
+                                                    <small id="custPhoneError" style="color:red;"></small>
                                                 </div>
                                                 <div class="d-grid gap-2">
                                                     <button type="submit" class="btn btn-success" id="saveCustomerBtn">Save</button>
@@ -180,14 +184,17 @@
                                                 <div class="mb-3">
                                                     <label for="updateCustomerName" class="form-label">Customer Name:</label>
                                                     <input type="text" class="form-control" id="updateCustomerName">
+                                                    <small id="updateCustNameError" style="color:red;"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="updateCustomerEmail" class="form-label">Customer Email:</label>
                                                     <input type="email" class="form-control" id="updateCustomerEmail">
+                                                    <small id="updateCustEmailError" style="color:red;"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="updatePhone" class="form-label">Phone:</label>
                                                     <input type="tel" class="form-control" id="updatePhone">
+                                                    <small id="updateCustPhoneError" style="color:red;"></small>
                                                 </div>
                                                 <div class="d-grid gap-2">
                                                     <button type="submit" class="btn btn-primary" id="confirmUpdateBtn">Update</button>
@@ -800,12 +807,12 @@
                         <!--Button Field Section-->
                         <div class="button-fields mt-3">
                             <!-- Update Order Button that triggers the modal -->
-                            <button type="button" class="btn btn-primary" id="updateOrderBtn" >
+                            <!--<button type="button" class="btn btn-primary" id="updateOrderBtn" >
                                 Update
-                            </button>
+                            </button>-->
 
                             <!-- Update Order Modal -->
-                            <div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="updateOrderModalLabel" aria-hidden="true">
+                           <!-- <div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="updateOrderModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header bg-primary text-white">
@@ -834,9 +841,9 @@
                                                         <div class="input-group">
                                                             <select class="form-select" id="customerUpdate">
                                                                 <option value="" selected disabled hidden>Select Customer</option>
-                                                                <!--<option value="John Smith">John Smith</option>
+                                                                &lt;!&ndash;<option value="John Smith">John Smith</option>
                                                                 <option value="Jane Doe">Jane Doe</option>
-                                                                <option value="	Robert Johnson">Robert Johnson</option>-->
+                                                                <option value="	Robert Johnson">Robert Johnson</option>&ndash;&gt;
                                                             </select>
                                                         </div>
                                                     </div>
@@ -845,7 +852,7 @@
                                                         <input type="text" class="form-control" id="updateCustomerIDInOrder" placeholder="C001">
                                                     </div>
                                                 </div>
-                                                <!--Order Items Table-->
+                                                &lt;!&ndash;Order Items Table&ndash;&gt;
                                                 <h6 class="mt-4 mb-3 fw-bold">Order Items</h6>
                                                 <div class="table-responsive">
                                                     <table class="table table-sm " id="updateOrderItemsTable">
@@ -860,7 +867,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody class="table-secondary" id="updateOrderTbody">
-                                                        <!--<tr>
+                                                        &lt;!&ndash;<tr>
                                                             <td>P001</td>
                                                             <td>Branded T-Shirt</td>
                                                             <td>Rs. 2,499</td>
@@ -887,11 +894,11 @@
                                                                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                                                 </button>
                                                             </td>
-                                                        </tr>-->
+                                                        </tr>&ndash;&gt;
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                 <!--Add New Items-->
+                                                 &lt;!&ndash;Add New Items&ndash;&gt;
                                                 <div class="card border-0 shadow-sm">
                                                                 <div class="card-header bg-info text-black fw-bold">
                                                                     Add Items
@@ -904,9 +911,9 @@
                                                                                 <div class="input-group">
                                                                                     <select class="form-select" id="newItemSelect">
                                                                                         <option value="" selected disabled hidden>Select item</option>
-                                                                                        <!--<option value="Branded T-Shirt">Branded T-Shirt</option>
+                                                                                        &lt;!&ndash;<option value="Branded T-Shirt">Branded T-Shirt</option>
                                                                                         <option value="Leather Wallet">Leather Wallet</option>
-                                                                                        <option value="Designer Sunglasses">Designer Sunglasses</option>-->
+                                                                                        <option value="Designer Sunglasses">Designer Sunglasses</option>&ndash;&gt;
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -931,7 +938,7 @@
                                                                 </form>
                                                             </div>
 
-                                                <!--New Order Summary Card -->
+                                                &lt;!&ndash;New Order Summary Card &ndash;&gt;
                                                 <div class="mb-4 mt-3">
                                                     <div class="card border-0 shadow-sm">
                                                         <form id="newOrderSummaryForm">
@@ -975,7 +982,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <!-- Delete Order Button that triggers the modal -->
                             <button type="button" class="btn btn-danger"  id="deleteOrderBtn">

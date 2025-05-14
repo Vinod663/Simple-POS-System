@@ -50,22 +50,60 @@ function loadCustomerTable() {
 
 //save customer
 $('#saveCustomerBtn').on('click', function(){
-    let id = $('#customerId').val();
-    let name = $('#customerName').val();
-    let email = $('#customerEmail').val();
-    let phone = $('#phone').val();
+    let id = $('#customerId').val().trim();
+    let name = $('#customerName').val().trim();
+    let email = $('#customerEmail').val().trim();
+    let phone = $('#phone').val().trim();
+
+    $('#custIdError').text('');
+    $('#customerId').css('border-color', '');
+    $('#custNameError').text('');
+    $('#customerName').css('border-color', '');
+    $('#custEmailError').text('');
+    $('#customerEmail').css('border-color', '');
+    $('#custPhoneError').text('');
+    $('#phone').css('border-color', '');
+    let hasError = false;
 
     if (id === '' || name === '' || email === '' || phone === '') {
         /*const CustomerModal = $('#newCustomerModal');
         CustomerModal.modal('hide');*/
         Swal.fire({
             title: 'Error!',
-            text: 'Invalid Inputs',
+            text: 'Invalid Inputs! Fill all fields',
             icon: 'error',
             confirmButtonText: 'Ok'
         })
         return;
     }
+
+    // Validate ID (format: C001)
+    if (!/^C\d{3}$/.test(id)) {
+        $('#custIdError').text('ID must be like C001');
+        $('#customerId').css('border-color', 'red');
+        hasError = true;
+    }
+
+    // Validate Name (only letters and spaces, min 3 chars)
+    if (!/^[A-Za-z\s]{3,30}$/.test(name)) {
+        $('#custNameError').text('Name must be 3–30 letters only');
+        $('#customerName').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        $('#custEmailError').text('Enter a valid email');
+        $('#customerEmail').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (!/^\+947\d{8}$/.test(phone)) {
+        $('#custPhoneError').text('Use +94 format (e.g., +94712345678)');
+        $('#phone').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (hasError) return;
 
     // Check for duplicate ID(.some() is a special JavaScript method. It Looks through each item (we call it customer here))
     const exists = customers_db.some(customer => customer.customer_id === id);
@@ -107,6 +145,12 @@ $('#updateCustomerBtn').on('click', function(){
         });
         return;
     }
+    $('#updateCustNameError').text('');
+    $('#updateCustomerName').css('border-color', '');
+    $('#updateCustEmailError').text('');
+    $('#updateCustomerEmail').css('border-color', '');
+    $('#updateCustPhoneError').text('');
+    $('#updatePhone').css('border-color', '');
 
     // Show modal and fill in customer info
     const customer = customers_db.find(customer => customer.customer_id === selectedCustomerId);
@@ -121,20 +165,49 @@ $('#updateCustomerBtn').on('click', function(){
 
 //confirm update
 $('#confirmUpdateBtn').on('click', function(){
-    const id = $('#updateCustomerId').val();
-    const name = $('#updateCustomerName').val();
-    const email = $('#updateCustomerEmail').val();
-    const phone = $('#updatePhone').val();
+    const id = $('#updateCustomerId').val().trim();
+    const name = $('#updateCustomerName').val().trim();
+    const email = $('#updateCustomerEmail').val().trim();
+    const phone = $('#updatePhone').val().trim();
+
+    $('#updateCustNameError').text('');
+    $('#updateCustomerName').css('border-color', '');
+    $('#updateCustEmailError').text('');
+    $('#updateCustomerEmail').css('border-color', '');
+    $('#updateCustPhoneError').text('');
+    $('#updatePhone').css('border-color', '');
+    let hasError = false;
 
     if (id === '' || name === '' || email === '' || phone === '') {
         Swal.fire({
             title: 'Error!',
-            text: 'Invalid Inputs',
+            text: 'Invalid Inputs! Fill all fields',
             icon: 'error',
             confirmButtonText: 'Ok'
         });
         return;
     }
+
+    // Validate Name (only letters and spaces, min 3 chars)
+    if (!/^[A-Za-z\s]{3,30}$/.test(name)) {
+        $('#updateCustNameError').text('Name must be 3–30 letters only');
+        $('#updateCustomerName').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        $('#updateCustEmailError').text('Enter a valid email');
+        $('#updateCustomerEmail').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (!/^\+947\d{8}$/.test(phone)) {
+        $('#updateCustPhoneError').text('Use +94 format (e.g., +94712345678)');
+        $('#updatePhone').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (hasError) return;
 
     // Update customer data
     const index = customers_db.findIndex(customer => customer.customer_id === selectedCustomerId);

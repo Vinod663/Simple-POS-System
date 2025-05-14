@@ -2,6 +2,9 @@ import {items_db, orders_db, customers_db} from "../db/db.js";
 import OrderModel from "../model/OrderModel.js";
 
 let selectedOrderId = null;
+/*let fullTotal = 0;
+let subTotal=0;
+const preOrderItems = [];*/
 
 orders_db.length = 0; // Clear the orders_db array
 const savedOrders= localStorage.getItem("order_data");
@@ -258,6 +261,7 @@ $('#newItemSelect').on('change', function() {
 });
 
 //Update Order
+/*
 $('#updateOrderBtn').on('click', function() {
     if (selectedOrderId === null) {
         Swal.fire({
@@ -279,9 +283,20 @@ $('#updateOrderBtn').on('click', function() {
     order.order_items.map((item, index) => {
         let id = item.itemId;
         let name = item.itemName;
+        let category = item.itemCategory;
         let price = item.itemPrice;
         let qty = item.itemQty;
         let total=item.itemTotalPrice
+
+        preOrderItems.push({
+            id,
+            name,
+            category,
+            price,
+            qty,
+            total
+        });
+        console.log("Previous Order Items:",preOrderItems);
 
         let data = `<tr>
                         <td>${id}</td>
@@ -300,7 +315,9 @@ $('#updateOrderBtn').on('click', function() {
     });
 
     $('#UpdateTotal').text("Total: Rs."+order.total_order_amount+".00");
+    fullTotal = order.total_order_amount;
     $('#UpdateSubTotal').text("Sub Total: Rs."+order.order_subtotal+".00");
+    subTotal = order.order_subtotal;
     $('#discountAmountUpdate').val(order.order_discount);
     $('#discountTypeUpdate').val(order.order_discount_type);
     $('#updateCashAmount').val(order.order_cash);
@@ -311,4 +328,4 @@ $('#updateOrderBtn').on('click', function() {
 
     //show the modal
     $('#updateOrderModal').modal('show');
-});
+});*/

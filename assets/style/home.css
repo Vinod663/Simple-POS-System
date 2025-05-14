@@ -107,6 +107,13 @@
 }
 
 
+.error-text {
+    color: red;
+    font-size: 13px;
+}
+
+
+
 /* Center brand in mobile view */
 @media (max-width: 991.98px) {
     .navbar-brand {
