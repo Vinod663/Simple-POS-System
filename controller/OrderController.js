@@ -168,6 +168,10 @@ $('#purchaseBtn').on('click', function(){
     let custEmail= $('#SelectCustomerEmail').val();
     let custPhone= $('#SelectCustomerPhone').val();
 
+    $('#orderIDError').text('');
+    $('#selectOrderID').css('border-color', '');
+    let hasError = false;
+
     if (ordId === '' || ordDate === '' || custId === '' || custName === '' || custEmail === '' || custPhone === '') {
         Swal.fire({
             icon: 'error',
@@ -176,6 +180,15 @@ $('#purchaseBtn').on('click', function(){
         })
         return;
     }
+
+    if (!/^ORD-\d{4}$/.test(ordId)) {
+        $('#orderIDError').text('ID must be like ORD-1001');
+        $('#selectOrderID').css('border-color', 'red');
+        hasError = true;
+    }
+
+    if (hasError) return;
+
 
     const trimmedOrdId = ordId.trim();
     const exists = orders_db.some(order => order.order_id.trim() === trimmedOrdId);
