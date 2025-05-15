@@ -373,7 +373,8 @@ function loadOrderDetailTable() {
         let date = order.order_date;
         let items = order.order_items;
         let totalQty = items.reduce((sum, items) => sum + parseInt(items.itemQty), 0);
-        let total = order.total_order_amount;
+        /*let total = order.total_order_amount;*/
+        let subTotal = order.order_subtotal;
 
         let data = `<tr>
                         <td>${id}</td>
@@ -381,7 +382,7 @@ function loadOrderDetailTable() {
                         <td>${name}</td>
                         <td>${date}</td>
                         <td>${totalQty}</td>
-                        <td>${total}</td>
+                        <td>${subTotal}</td>
                    </tr>`
 
         $('#orderDetail-tbody').append(data);

@@ -23,7 +23,8 @@ function loadOrderDetailTable() {
         let date = order.order_date;
         let items = order.order_items;
         let totalQty = items.reduce((sum, items) => sum + parseInt(items.itemQty), 0);
-        let total = order.total_order_amount;
+        /*let total = order.total_order_amount;*/
+        let subTotal = order.order_subtotal;
 
         let data = `<tr>
                         <td>${id}</td>
@@ -31,7 +32,7 @@ function loadOrderDetailTable() {
                         <td>${name}</td>
                         <td>${date}</td>
                         <td>${totalQty}</td>
-                        <td>${total}</td>
+                        <td>${subTotal}</td>
                    </tr>`
 
         $('#orderDetail-tbody').append(data);
@@ -115,7 +116,7 @@ $('#orderSearchBtn').on('click', function() {
                 <td data-label="${headers[2]}">${order.customer_name}</td>
                 <td data-label="${headers[3]}">${order.order_date}</td>
                 <td data-label="${headers[4]}">${totalQty}</td>
-                <td data-label="${headers[5]}">${order.total_order_amount}</td>
+                <td data-label="${headers[5]}">${order.order_subtotal}</td>
             </tr>`;
 
         $('#orderDetail-tbody').append(rows);
@@ -372,7 +373,7 @@ $('#viewOrderBtn').on('click', function() {
     $('#viewSubTotal').text("Sub Total: Rs."+order.order_subtotal+".00");
     let discountType=order.order_discount_type;
     let discountAmount=order.order_discount;
-    if (discountAmount===null){
+    if (discountAmount===null||discountAmount===undefined||discountAmount===""||isNaN(discountAmount)) {
         $('#viewDiscountAmount').val(0 + "%");
     }
     else if(discountType==="%") {
