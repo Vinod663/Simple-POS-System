@@ -1017,6 +1017,105 @@
                                 </div>
                             </div>
 
+                            <button type="button" class="btn btn-info" id="viewOrderBtn" >
+                                View Order
+                            </button>
+
+                            <!--View Order Modal-->
+                             <div class="modal fade" id="viewOrderModal" tabindex="-1" aria-labelledby="viewOrderModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-info text-black">
+                                            <h5 class="modal-title position-absolute top-20 start-50 translate-middle-x" id="viewOrderModalLabel">View Order</h5>
+                                            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="ViewOrderForm">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="viewOrderID" class="form-label small fw-bold">Order Id:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="viewOrderID"  placeholder="ORD-1001" readonly >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="viewOrderDate" class="form-label small fw-bold">Date:</label>
+                                                        <div class="input-group">
+                                                            <input type="date" class="form-control" id="viewOrderDate" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="viewCustomer" class="form-label small fw-bold">Customer Name:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" id="viewCustomer" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="viewCustomerIDInOrder" class="form-label small fw-bold">Customer ID:</label>
+                                                        <input type="text" class="form-control" id="viewCustomerIDInOrder" placeholder="C001" readonly>
+                                                    </div>
+                                                </div>
+                                                <!--Order Items Table-->
+                                                <h6 class="mt-4 mb-3 fw-bold">Order Items</h6>
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm " id="viewOrderItemsTable">
+                                                        <thead class="table-primary">
+                                                        <tr>
+                                                            <th>Item Code</th>
+                                                            <th>Item Name</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="table-secondary" id="viewOrderTbody">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!--View Order Summary Card -->
+                                                <div class="mb-4 mt-3">
+                                                    <div class="card border-0 shadow-sm">
+                                                        <form id="viewOrderSummaryForm">
+                                                            <div class="card-body bg-secondary-subtle">
+                                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                    <h5 class="text-primary mb-0" id="viewTotal" readonly="">Total: Rs.0.00</h5>
+                                                                    <span class="text-danger" id="viewSubTotal" readonly="">Sub Total: Rs.0.00</span>
+                                                                </div>
+
+                                                                <div class="col-12">
+                                                                    <label class="form-label small fw-bold">Discount:</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" id="viewDiscountAmount" placeholder="10" readonly>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <div>
+                                                                        <label for="viewCashAmount" class="form-label small fw-bold">Cash:</label>
+                                                                        <input type="text" class="form-control" id="viewCashAmount" placeholder="Rs.25000.00" readonly>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="viewBalanceAmount" class="form-label small fw-bold">Balance:</label>
+                                                                        <input type="text" class="form-control" id="viewBalanceAmount" placeholder="Rs.500.00" readonly>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="button" class="btn bg-warning" id="orderResetBtn" >
                                 Reset
                             </button>

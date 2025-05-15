@@ -329,3 +329,71 @@ $('#updateOrderBtn').on('click', function() {
     //show the modal
     $('#updateOrderModal').modal('show');
 });*/
+
+//View Order
+$('#viewOrderBtn').on('click', function() {
+    if (selectedOrderId === null) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please select an order to View.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
+    const order= orders_db.find(order => order.order_id === selectedOrderId);
+    $('#viewOrderID').val(order.order_id);
+    $('#viewOrderDate').val(order.order_date);
+    $('#viewCustomer').val(order.customer_name);
+    $('#viewCustomerIDInOrder').val(order.customer_id);
+
+    //populate the item table
+    $('#viewOrderTbody').empty();
+    order.order_items.map((item, index) => {
+        let id = item.itemId;
+        let name = item.itemName;
+        let category = item.itemCategory;
+        let price = item.itemPrice;
+        let qty = item.itemQty;
+        let total=item.itemTotalPrice
+
+        let data = `<tr>
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${price}</td>
+                        <td>${qty}</td>
+                        <td>${total}</td>
+                          </tr>`
+
+        $('#viewOrderTbody').append(data);
+    });
+
+    $('#viewTotal').text("Total: Rs."+order.total_order_amount+".00");
+    $('#viewSubTotal').text("Sub Total: Rs."+order.order_subtotal+".00");
+    let discountType=order.order_discount_type;
+    let discountAmount=order.order_discount;
+    if (discountAmount===null){
+        $('#viewDiscountAmount').val(0 + "%");
+    }
+    else if(discountType==="%") {
+        $('#viewDiscountAmount').val(discountAmount + "%");
+    }
+    else if(discountType==="Rs") {
+        $('#viewDiscountAmount').val("Rs."+discountAmount+".00");
+    }
+    else{
+        $('#viewDiscountAmount').val(0 + "%");
+    }
+
+/*
+    $('#viewDiscountAmount').val(order.order_discount+"("+order.order_discount_type+")");
+*/
+    $('#viewCashAmount').val("Rs."+order.order_cash+".00");
+    $('#viewBalanceAmount').val("Rs."+order.order_change+".00");
+
+
+
+
+    //show the modal
+    $('#viewOrderModal').modal('show');
+});
