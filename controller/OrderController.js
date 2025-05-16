@@ -248,6 +248,11 @@ $('#purchaseBtn').on('click', function(){
             addDataLabel();//add data-label to table//
             resetFields();//reset all fields
             loadOrderDetailTable();
+            // Update today's order count and revenue
+            let currentDate= new Date().toISOString().split('T')[0];
+            const todayOrders= orders_db.filter(order => order.order_date === currentDate);
+            $('#todayOrderCount').text(todayOrders.length);
+            $('#revenueToday').text("Rs."+todayOrders.reduce((sum, order) => sum + parseInt(order.order_subtotal), 0)+".00");
             /*console.log(orderData);*/
 
             Swal.fire({

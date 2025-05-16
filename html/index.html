@@ -52,9 +52,11 @@
                             <div class="card stat-customer">
                                 <div class="card-body">
                                     <h5 class="card-title">Total Customers</h5>
-                                    <p class="stat-number">124</p>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-primary customer-btn">Customers</a>
+                                    <p class="stat-number" id="totalCustomerCount">0</p>
+                                    <p class="card-text">Keep track of how many customers are actively registered and growing daily.
+
+                                    </p>
+                                    <a href="#" class="btn btn-primary customer-btn" onclick="showSection('customer')">Customers</a>
                                 </div>
                             </div>
                         </div>
@@ -62,9 +64,9 @@
                             <div class="card stat-item">
                                 <div class="card-body ">
                                     <h5 class="card-title">Total Items</h5>
-                                    <p class="stat-number">458</p>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-primary item-btn">Items</a>
+                                    <p class="stat-number" id="totalItemCount">0</p>
+                                    <p class="card-text">View the total number of products currently listed and available for sale.</p>
+                                    <a href="#" class="btn btn-primary item-btn" onclick="showSection('item')">Items</a>
                                 </div>
                             </div>
                         </div>
@@ -72,9 +74,9 @@
                             <div class="card stat-order">
                                 <div class="card-body">
                                     <h5 class="card-title">Orders today</h5>
-                                    <p class="stat-number">16</p>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-primary orders-btn">orders</a>
+                                    <p class="stat-number" id="todayOrderCount">0</p>
+                                    <p class="card-text">Monitor how many orders have been successfully placed by users today.</p>
+                                    <a href="#" class="btn btn-primary orders-btn" onclick="showSection('orderDetail')">Order-Details</a>
                                 </div>
                             </div>
                         </div>
@@ -82,18 +84,18 @@
                             <div class="card stat-revenue">
                                 <div class="card-body ">
                                     <h5 class="card-title">Revenue Today</h5>
-                                    <p class="stat-number">Rs.500000.00</p>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <p class="stat-number" id="revenueToday">Rs.0.00</p>
+                                    <p class="card-text">Check the full revenue generated from all transactions made today.</p>
                                 </div>
                             </div>
                         </div>
 
                         <h5 class="qk-actions">Quick Actions</h5>
                         <div class="d-grid gap-2 d-md-block">
-                            <button class="btn btn-primary" type="button">New Customer</button>
-                            <button class="btn btn-primary" type="button">New Order</button>
-                            <button class="btn btn-primary" type="button">Add Inventory</button>
-                            <button class="btn btn-primary" type="button">Search Orders</button>
+                            <button class="btn btn-primary" type="button" onclick="showSection('customer')">New Customer</button>
+                            <button class="btn btn-primary" type="button" onclick="showSection('order')">New Order</button>
+                            <button class="btn btn-primary" type="button" onclick="showSection('item')">Add Inventory</button>
+                            <button class="btn btn-primary" type="button" onclick="showSection('orderDetail')">Search Orders</button>
                         </div>
                     </div>
                 </div>

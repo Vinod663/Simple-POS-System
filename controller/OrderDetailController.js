@@ -12,6 +12,12 @@ if (savedOrders) {
     orders_db.push(...JSON.parse(savedOrders));//...->spread operator(spreads out all the items from an array one by one.), JSON.parse() = Convert text back to array
 }
 loadOrderDetailTable();
+
+let currentDate= new Date().toISOString().split('T')[0];
+const todayOrders= orders_db.filter(order => order.order_date === currentDate);
+$('#todayOrderCount').text(todayOrders.length);
+$('#revenueToday').text("Rs."+todayOrders.reduce((sum, order) => sum + parseInt(order.order_subtotal), 0)+".00");
+
 addDataLabel();
 
 function loadOrderDetailTable() {
@@ -166,6 +172,12 @@ $('#confirmDeleteOrderBtn').on('click', function() {
         orders_db.splice(orderIndex, 1);
         localStorage.setItem("order_data", JSON.stringify(orders_db));
         loadOrderDetailTable();
+
+        let currentDate= new Date().toISOString().split('T')[0];
+        const todayOrders= orders_db.filter(order => order.order_date === currentDate);
+        $('#todayOrderCount').text(todayOrders.length);
+        $('#revenueToday').text("Rs."+todayOrders.reduce((sum, order) => sum + parseInt(order.order_subtotal), 0)+".00");
+
         addDataLabel();
         loadItemTable();
         loadItemToComboBox();

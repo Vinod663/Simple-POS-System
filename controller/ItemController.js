@@ -11,6 +11,7 @@ if (savedItems) {
 }
 loadItemTable();
 loadItemToComboBox();
+$('#totalItemCount').text(items_db.length);
 addDataLabel();
 
 function loadItemTable() {
@@ -124,6 +125,7 @@ $('#saveItemBtn').on('click', function(){
     console.log(items_db);
     loadItemTable();
     loadItemToComboBox();
+    $('#totalItemCount').text(items_db.length);
     clearItemFields();
     addDataLabel();
     Swal.fire({
@@ -234,6 +236,7 @@ $('#confirmItemUpdateBtn').on('click', function(){
         localStorage.setItem("item_data", JSON.stringify(items_db));//save to localStorage
         loadItemTable();
         loadItemToComboBox();
+        $('#totalItemCount').text(items_db.length);
         $('#updateItemModal').modal('hide');
         $('#searchItemBar').val('');
         Swal.fire({
@@ -280,6 +283,7 @@ $('#confirmItemDeleteBtn').on('click', function() {
         localStorage.setItem("item_data", JSON.stringify(items_db));//save to localStorage
         loadItemTable();
         loadItemToComboBox();
+        $('#totalItemCount').text(items_db.length);
 
         Swal.fire({
             title: "Deleted Successfully!",

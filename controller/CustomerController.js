@@ -12,6 +12,7 @@ if (savedCustomers) {
 loadCustomerTable();
 loadCustomersToComboBox();
 addDataLabel();
+$('#totalCustomerCount').text(customers_db.length);
 
 //load customer table
 function loadCustomerTable() {
@@ -124,6 +125,7 @@ $('#saveCustomerBtn').on('click', function(){
 
     console.log(customers_db);
     loadCustomerTable();
+    $('#totalCustomerCount').text(customers_db.length);
     loadCustomersToComboBox();
     clearCustomerFields();
     addDataLabel();
@@ -219,6 +221,7 @@ $('#confirmUpdateBtn').on('click', function(){
 
         localStorage.setItem("customer_data", JSON.stringify(customers_db));//update the localStorage
         loadCustomerTable();
+        $('#totalCustomerCount').text(customers_db.length);
         loadCustomersToComboBox();
         $('#updateCustomerModal').modal('hide');
         $('#searchCustomerBar').val('');
@@ -271,6 +274,7 @@ $('#confirmDeleteBtn').on('click', function(){
         customers_db.splice(index, 1);
         localStorage.setItem("customer_data", JSON.stringify(customers_db));//save to localStorage
         loadCustomerTable();
+        $('#totalCustomerCount').text(customers_db.length);
         loadCustomersToComboBox();
 
         Swal.fire({
@@ -365,6 +369,7 @@ $('#resetFieldsBtn').on('click', function(){
     $('#searchCustomerBar').val('');
     $('#customerFilterCombo').val('Name');
     loadCustomerTable();
+    $('#totalCustomerCount').text(customers_db.length);
     addDataLabel();
 
 });
